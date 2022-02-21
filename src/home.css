@@ -1,0 +1,27 @@
+.checkout{
+    padding-bottom: 40px;
+    /* margin-top: 20px; */
+}
+.subtotal{
+    background-color: #f3f3f3ed;
+    width: 300px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+.subtotal .btn{
+    margin-top: 10px;
+    width: 100%;
+}
+.checkout img{
+    /* width: 8000px !important; */
+    padding: 0 !important;
+}
+.card__image{
+    max-height: 300px;
+}
+.carousel__carousel{
+    margin-top: 100px !important;
+}
