@@ -10,7 +10,7 @@ function CheckoutItem({id,title,price,image,rating}) {
         })
     }
   return (
-    <div className='row'>
+    <div className='row CheckoutItem'>
         <div className="checkoutProduct row bg-white px-5 py-3 d-flex align-items-center">
         <div className="col-12 col-md-3">
              <img className="checkoutProduct_image img-thumbnail" src={image} alt={title}/>

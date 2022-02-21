@@ -1,8 +1,10 @@
 import React from 'react';
+import FlipMove from 'react-flip-move';
 import './home.css';
 import CheckoutItem from './CheckoutItem';
 import Subtotal from './Subtotal';
 import { useStateValue } from './StateProvider';
+
 
 function Checkout() {
     const [{ basket, user }, dispatch] = useStateValue();
@@ -26,8 +28,15 @@ function Checkout() {
 						Your shopping basket
 					</h2> <hr/>
             </div>
+            {/* <FlipMove
+              duration={750}     
+         easing="ease-out"
+         enterAnimation = "accordianVertical"
+         leaveAnimation = "accordianVertical"
+            > */}
             {basket.map((data) => {
-                return <CheckoutItem
+                return <CheckoutItem {...data}
+                            key={data.id}
                             id={data.id}
                             title={data.title}
                             image={data.image}
@@ -35,6 +44,7 @@ function Checkout() {
                             rating={data.rating}
                         />
             })}
+            {/* </FlipMove> */}
              {/* <CheckoutItem/> <CheckoutItem/> */}
            
 		</div>

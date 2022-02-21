@@ -21,7 +21,7 @@ function Header() {
       <div className="nav-left">
         <div id="nav-logo">
           <Link to="/" className="nav-logo-link"></Link>
-          <Link to="/" className="nav-logo-tagline">Try Prime</Link>
+          <Link to="/" className="nav-logo-tagline">Book Store</Link>
         </div>
       </div>
       <div className="nav-right">
