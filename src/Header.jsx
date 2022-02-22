@@ -122,7 +122,8 @@ function Header() {
           <i className="fa fa-caret-down" aria-hidden="true"></i>
         </Link>
 
-        <Link className="nav-a" to="/">
+        <Link className="nav-a" to="/orders">
+        <span>Returns &</span>
           Orders
         </Link>
 

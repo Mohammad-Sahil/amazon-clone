@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStateValue } from './StateProvider';
 
-function CheckoutItem({id,title,price,image,rating}) {
+function CheckoutItem({id,title,price,image,rating, hideButton, noHover}) {
     const [{ basket }, dispatch] = useStateValue();
     const removeFromBasket = () => {
         dispatch({
@@ -10,7 +10,7 @@ function CheckoutItem({id,title,price,image,rating}) {
         })
     }
   return (
-    <div className='row CheckoutItem'>
+    <div className={`row CheckoutItem ${noHover}`}>
         <div className="checkoutProduct row bg-white px-5 py-3 d-flex align-items-center">
         <div className="col-12 col-md-3">
              <img className="checkoutProduct_image img-thumbnail" src={image} alt={title}/>
@@ -18,16 +18,18 @@ function CheckoutItem({id,title,price,image,rating}) {
             <div className="checkoutProduct_info col-12 col-md-9" style={{paddingLeft: "30px"}}>
                 <h4 className="checkoutProduct_title">{title}</h4>
                     <h5 className="checkoutProduct_price">
-                        <small>$</small><strong>{price}</strong>
+                        <small> </small><strong>₹ {price}</strong>
                     </h5>
                 <div className="checkoutProduct_rating d-flex">
                     <p className='d-flex'>{Array(rating).fill().map((_, i) => {
                     return <p key={i}>⭐</p>
                 })}</p>
                 </div>
-                    <button className='btn' onClick={removeFromBasket}>Remove from basket</button>
+                    {!hideButton && (<button className='btn' onClick={removeFromBasket}>Remove from basket</button>)}
             </div>
+            
         </div>
+        
     </div>
   )
 }

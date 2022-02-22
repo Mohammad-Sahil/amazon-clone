@@ -24,7 +24,7 @@ function Card({id, title, image, price, rating, responsive}) {
         <div className={responsive}>
             <div className='Cards__main p-3 px-5 bg-white'>
                 <h2 className="title m-0">{title}</h2>
-                <h2 className="price m-0">$<span className='font-weight-bold'>{price}</span></h2>
+                <h2 className="price m-0">₹<span className='font-weight-bold'>{price}</span></h2>
                 <h5 className="stars d-flex">{Array(rating).fill().map((_, i) => {
                     return <p key={i}>⭐</p>
                 })}</h5>

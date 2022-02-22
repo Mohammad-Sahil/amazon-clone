@@ -39,3 +39,15 @@
 .payment__margin{
     margin-top: 133px !important;
 }
+.CheckoutItem.true:hover{
+    box-shadow: none;
+    transform: scale(1) !important;
+}
+.control-dots, .legend, .thumbs-wrapper.axis-vertical{
+    display: none !important;
+}
+.carousel .slide img{
+    /* height: 500px !important; */
+    /* width: auto !important; */
+}
+/* orders page  */

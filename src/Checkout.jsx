@@ -4,6 +4,7 @@ import './home.css';
 import CheckoutItem from './CheckoutItem';
 import Subtotal from './Subtotal';
 import { useStateValue } from './StateProvider';
+import { Link } from 'react-router-dom';
 
 
 function Checkout() {
@@ -35,7 +36,7 @@ function Checkout() {
          leaveAnimation = "accordianVertical"
             > */}
             {basket.map((data) => {
-                return <CheckoutItem {...data}
+                return <CheckoutItem
                             key={data.id}
                             id={data.id}
                             title={data.title}
@@ -46,6 +47,9 @@ function Checkout() {
             })}
             {/* </FlipMove> */}
              {/* <CheckoutItem/> <CheckoutItem/> */}
+            <div className='mt-5'>{(basket?.length !== 0) ? null : <div className='display-6 text-center p-5 bg-white'>
+    <div className='display-3'>Your Cart will be listed here !</div><Link className='text-center' to='/'>Click here to purchase</Link></div>}</div>
+
            
 		</div>
   )

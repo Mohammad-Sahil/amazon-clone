@@ -17,18 +17,18 @@ function Subtotal() {
     }
   return (
     <div class="subtotal">
-    <CurrencyFormat renderText={(value) => (
+    <CurrencyFormat renderText={(tot) => (
         <>
-            <p>Subtotal ({basket?.length} items): <strong>${tot}</strong></p>
+            <p>Subtotal ({basket?.length} items): <strong>{tot}</strong></p>
               <small class="subtotal_gift">
             <input type="checkbox"/> This order contains a gift</small><br/>
         </>
     )}
         decimalScale={2}
-        value={0}
+        value={tot}
         displayType={"text"}
         thousandSeparator={true}
-        prefix={"$"}
+        prefix={"₹"}
     />
        <button onClick={paymentPage} className='btn'>Proceed to Checkout</button>
     </div>

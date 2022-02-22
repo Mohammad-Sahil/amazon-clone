@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useStateValue } from './StateProvider';
 import CheckoutItem from './CheckoutItem';
 import './home.css';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import axios from './axios';
+import { db } from './firebase';
 
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -17,7 +18,7 @@ function Payment() {
   const [error, setError] = useState(null);
   const [desabled, setDesabled] = useState(true);
   const [succeeded, setSucceeded] = useState(false);
-  const [clientSecret, setClientSecret] = useState(false);
+  const [clientSecret, setClientSecret] = useState(true);
   const [processing, setProcessing] = useState("");
 
   let tot = 0;
@@ -29,12 +30,14 @@ for(let i=0; i<basket.length; i++){
     const getClientSecret = async() => {
         const response = await axios({
             method: 'post',
-            url: `/payment/create?total=${tot*100}`
+            url: `/payments/create?total=${tot*100}`
         });
         setClientSecret(response.data.clientSecret);
     }
     getClientSecret();
   },[tot]);
+
+  console.log('this secret is >>>>', clientSecret);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -44,12 +47,22 @@ for(let i=0; i<basket.length; i++){
         payment_method: {
             card: elements.getElement(CardElement)
         }
-    }).then(({playmentIntent}) => {
+    }).then(({paymentIntent}) => {
         //payment confirmation
+        console.log('this is paymentIndtent', paymentIntent);
+        db.collection('users').doc(user?.uid).collection('orders').doc(paymentIntent.id).set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created
+        });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
 
+        dispatch({
+            type: 'EMPTY_BASKET',
+        });
         navigate('/orders', {replace: true});
     }) 
   }
@@ -111,7 +124,7 @@ for(let i=0; i<basket.length; i++){
                             value={tot}
                             displayType={"text"}
                             thousandSeparator={true}
-                            prefix={"$"}
+                            prefix={"₹"}
                     />
                     <button disabled={desabled || succeeded || processing} onClick={handleSubmit} className='btn' style={{width: "100%"}}>
                         {processing ? 'Processing' : 'Buy Now'}
